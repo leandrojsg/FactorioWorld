@@ -1,4 +1,4 @@
-package com.lunlucky.pokemon0D;
+package com.lunlucky.FactorioWorld;
 
 import java.text.MessageFormat;
 import java.util.Scanner;
