@@ -19,6 +19,7 @@ public class Main {
             String mensaje = "opcion 1: Cambiar el nombre a la fabrica? \n" +
                              "opcion 2: Intruduce minerales \n" +
                              "opcion 3: Mostrar minerales actuales \n" +
+                             "opcion 4: Fundir el acerro \n" +
                              "opcion 999: cerrar el programa \n";
             System.out.println("\n");
             System.out.println(mensaje);
@@ -44,12 +45,16 @@ public class Main {
                 contadorDemiMinerales(hierro, carbon, acero) ;
                 System.out.println("\n");
             }
-
+            if(opcion == 4){
+               acero = hierro + carbon ;
+               hierro = 0;
+               carbon = 0;
+               System.out.println("\nel total de acero es :" + acero + "\n");
+            }
             if(opcion == 999) {
                 System.out.println("Adios capitan!");
                 return ;
             }
-
         }
     }
     public static void contadorDemiMinerales (int hierro, int carbon, int acero) {
