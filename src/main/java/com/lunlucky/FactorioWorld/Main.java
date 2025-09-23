@@ -3,6 +3,7 @@ package com.lunlucky.FactorioWorld;
 import java.text.MessageFormat;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
         int opcion = 0;
@@ -20,6 +21,7 @@ public class Main {
                     "opcion 2: Intruduce minerales \n" +
                     "opcion 3: Mostrar minerales actuales \n" +
                     "opcion 4: Fundir el acero \n" +
+                    "opcion 5: picar hierro\n" +
                     "opcion 999: cerrar el programa \n";
             System.out.println("\n");
             System.out.println(mensaje);
@@ -59,6 +61,10 @@ public class Main {
                 else {
                     System.out.println("\nNo se fundira el acero\n");
                 }
+
+            }
+            if (opcion == 5)  {
+                hierro = picarhierro(hierro);
             }
             if (opcion == 999) {
                 System.out.println("Adios capitan!");
@@ -78,5 +84,12 @@ public class Main {
 
                         , hierro, carbon, acero)
         );
+    }
+    public static int picarhierro (int hierro){
+        int sumatorio = (int) (Math.random() * 60);
+        hierro = hierro + sumatorio ;
+
+        System.out.println("\nHas picado:"+sumatorio+"\nY ahora tienes :"+hierro+"\n");
+        return hierro ;
     }
 }
