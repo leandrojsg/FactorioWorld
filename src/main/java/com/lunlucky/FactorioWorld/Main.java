@@ -3,14 +3,14 @@ package com.lunlucky.FactorioWorld;
 import java.text.MessageFormat;
 import java.util.Scanner;
 
-
 public class Main {
     public static void main(String[] args) {
         int opcion = 0;
         String fabrica = "Sin Nombre";
-        int hierro = 0;
-        int carbon = 0;
-        int acero = 0;
+        Item hierro = new Item("hierro", 0);
+        Item carbon = new Item("carbon", 0);
+        Item acero = new Item("acero", 0);
+        Personaje personaje = new Personaje("luis", hierro, carbon, acero);
 
 
         while (opcion != 999) {
@@ -38,33 +38,35 @@ public class Main {
                 System.out.println("¿cuantos minerales tenemos de cada mineral?");
                 Scanner cuentaminerales = new Scanner(System.in);
                 System.out.println("¿cuanto estas hierro introduciendo ?");
-                hierro = cuentaminerales.nextInt();
+                hierro.setCantidad(cuentaminerales.nextInt());
                 System.out.println("¿cuanto estas carbon introduciendo?");
-                carbon = cuentaminerales.nextInt();
+                carbon.setCantidad(cuentaminerales.nextInt());
                 System.out.println("\n");
             }
             if (opcion == 3) {
-                contadorDemiMinerales(hierro, carbon, acero);
+                hierro.contador();
+                carbon.contador();
+                acero.contador();
                 System.out.println("\n");
             }
             if (opcion == 4) {
-                String resultadoUsuario ;
+                String resultadoUsuario;
                 Scanner scannerfundir = new Scanner(System.in);
-                System.out.println("\n¿Quieres fundir el acero? \n si/no"+"\n");
+                System.out.println("\n¿Quieres fundir el acero? \n si/no" + "\n");
                 resultadoUsuario = scannerfundir.nextLine();
-                if (resultadoUsuario.equals("si")){
-                    acero = hierro + carbon;
-                    hierro = 0;
-                    carbon = 0;
-                    System.out.println("\nel total de acero es :" + acero + "\n");
-                }
-                else {
+                if (resultadoUsuario.equals("si")) {
+                    acero.setCantidad(hierro.getCantidad() + carbon.getCantidad());
+                    hierro.setCantidad(0);
+                    carbon.setCantidad(0);
+                    System.out.println("\nel total de acero es :" + acero.getCantidad() + "\n");
+                } else {
                     System.out.println("\nNo se fundira el acero\n");
                 }
 
             }
-            if (opcion == 5)  {
-                hierro = picarhierro(hierro);
+            if (opcion == 5) {
+                picarhierro(personaje);
+
             }
             if (opcion == 999) {
                 System.out.println("Adios capitan!");
@@ -73,23 +75,12 @@ public class Main {
         }
     }
 
-    public static void contadorDemiMinerales(int hierro, int carbon, int acero) {
-
-        System.out.println(
-                MessageFormat.format(
-                        "hierro:{0}" +
-                                "\ncarbon:{1}" +
-                                "\nacero:{2}" +
-                                "\n"
-
-                        , hierro, carbon, acero)
-        );
-    }
-    public static int picarhierro (int hierro){
+    public static void picarhierro(Personaje personaje) {
         int sumatorio = (int) (Math.random() * 60);
-        hierro = hierro + sumatorio ;
+        personaje.getSlot1().setCantidad(personaje.getSlot1().getCantidad() + sumatorio);
+        ;
 
-        System.out.println("\nHas picado:"+sumatorio+"\nY ahora tienes :"+hierro+"\n");
-        return hierro ;
+        System.out.println("\nHas picado:" + sumatorio + "\nY ahora tienes :" +
+                personaje.getSlot1().getCantidad() + "\n");
     }
 }
