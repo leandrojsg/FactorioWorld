@@ -1,10 +1,9 @@
 package com.lunlucky.FactorioWorld;
 
-import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int opcion = 0;
         String fabrica = "Sin Nombre";
         Item hierro = new Item("hierro", 0);
@@ -12,17 +11,19 @@ public class Main {
         Item acero = new Item("acero", 0);
         Personaje personaje = new Personaje("luis", hierro, carbon, acero);
 
-
         while (opcion != 999) {
             Scanner entradaUsuario = new Scanner(System.in);
 
+            Thread.sleep(2000);
             System.out.println("Bienvenido a esta fabrica llamada :" + fabrica);
-            String mensaje = "opcion 1: Cambiar el nombre a la fabrica? \n" +
-                    "opcion 2: Intruduce minerales \n" +
-                    "opcion 3: Mostrar minerales actuales \n" +
-                    "opcion 4: Fundir el acero \n" +
-                    "opcion 5: picar hierro\n" +
-                    "opcion 999: cerrar el programa \n";
+            String mensaje = """
+                    opcion 1: Cambiar el nombre a la fabrica?
+                    opcion 2: Intruduce minerales
+                    opcion 3: Mostrar minerales actuales
+                    opcion 4: Fundir el acero
+                    opcion 5: picar hierro
+                    opcion 999: cerrar el programa
+                    """;
             System.out.println("\n");
             System.out.println(mensaje);
             opcion = entradaUsuario.nextInt();
@@ -52,7 +53,9 @@ public class Main {
             if (opcion == 4) {
                 String resultadoUsuario;
                 Scanner scannerfundir = new Scanner(System.in);
-                System.out.println("\n¿Quieres fundir el acero? \n si/no" + "\n");
+                System.out.println("""
+                        ¿Quieres fundir el acero?
+                         si/no""");
                 resultadoUsuario = scannerfundir.nextLine();
                 if (resultadoUsuario.equals("si")) {
                     acero.setCantidad(hierro.getCantidad() + carbon.getCantidad());
@@ -78,8 +81,6 @@ public class Main {
     public static void picarhierro(Personaje personaje) {
         int sumatorio = (int) (Math.random() * 60);
         personaje.getSlot1().setCantidad(personaje.getSlot1().getCantidad() + sumatorio);
-        ;
-
         System.out.println("\nHas picado:" + sumatorio + "\nY ahora tienes :" +
                 personaje.getSlot1().getCantidad() + "\n");
     }
