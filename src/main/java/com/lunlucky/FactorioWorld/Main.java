@@ -6,10 +6,11 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int opcion = 0;
         String fabrica = "Sin Nombre";
-        Item hierro = new Item("hierro", 0);
-        Item carbon = new Item("carbon", 0);
-        Item acero = new Item("acero", 0);
+        Mineral hierro = new Mineral("hierro", 0);
+        Mineral carbon = new Mineral("carbon", 0);
+        Mineral acero = new Mineral("acero", 0);
         Personaje personaje = new Personaje("luis", hierro, carbon, acero);
+
 
         while (opcion != 999) {
             Scanner entradaUsuario = new Scanner(System.in);
@@ -68,20 +69,14 @@ public class Main {
 
             }
             if (opcion == 5) {
-                picarhierro(personaje);
-
+                carbon.minar();
+                hierro.minar();
+                acero.minar();
             }
             if (opcion == 999) {
                 System.out.println("Adios capitan!");
                 return;
             }
         }
-    }
-
-    public static void picarhierro(Personaje personaje) {
-        int sumatorio = (int) (Math.random() * 60);
-        personaje.getSlot1().setCantidad(personaje.getSlot1().getCantidad() + sumatorio);
-        System.out.println("\nHas picado:" + sumatorio + "\nY ahora tienes :" +
-                personaje.getSlot1().getCantidad() + "\n");
     }
 }
